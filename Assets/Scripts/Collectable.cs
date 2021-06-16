@@ -1,17 +1,25 @@
+using cakeslice;
 using UnityEngine;
 
 public class Collectable : MonoBehaviour, IInteractable
 {
+    [SerializeField] private Outline outline;
+
     public const string PickupEvent = "Pickup";
+
+    private void Start()
+    {
+        outline.enabled = false;
+    }
 
     public void OnPointerEnter()
     {
-        Debug.Log("OnPointerEnter " + name);
+        outline.enabled = true;
     }
 
     public void OnPointerExit()
     {
-        Debug.Log("OnPointerExit " + name);
+        outline.enabled = false;
     }
 
     public void OnPointerClick()
