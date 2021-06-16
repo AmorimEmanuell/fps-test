@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour, IInteractable
 {
+    [SerializeField] private ItemData itemData;
     [SerializeField] private Outline outline;
 
     public const string PickupEvent = "Pickup";
@@ -24,8 +25,7 @@ public class Collectable : MonoBehaviour, IInteractable
 
     public void OnPointerClick()
     {
-        Debug.Log("OnPointerClick " + name);
-        EventManager.Trigger(PickupEvent, this);
+        EventManager.Trigger(PickupEvent, itemData);
         gameObject.SetActive(false);
     }
 }

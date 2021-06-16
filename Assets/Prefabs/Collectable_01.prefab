@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd867d4fc1613946a2e450ab0337cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 2cfcff55692d7404f8c4f26716ebee0e, type: 2}
   outline: {fileID: 6286147947403314936}
 --- !u!114 &6286147947403314936
 MonoBehaviour:

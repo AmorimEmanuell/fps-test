@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private List<Collectable> picked = new List<Collectable>();
+    [SerializeField] private List<ItemData> picked = new List<ItemData>();
+
+    public const string OpenEvent = "OpenInventory";
 
     private void Awake()
     {
@@ -12,10 +14,9 @@ public class Inventory : MonoBehaviour
 
     private void PickupCollectableHandler(object obj)
     {
-        if (obj is Collectable collectable)
+        if (obj is ItemData itemData)
         {
-            Debug.Log("Inventory::PickupCollectableHandler " + collectable.name);
-            picked.Add(collectable);
+            picked.Add(itemData);
         }
     }
 }

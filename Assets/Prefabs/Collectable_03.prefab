@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbd867d4fc1613946a2e450ab0337cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 88a78c8f83d7bfe4ab5fc7720972bf99, type: 2}
   outline: {fileID: 2975960234959363546}
 --- !u!114 &2975960234959363546
 MonoBehaviour:
