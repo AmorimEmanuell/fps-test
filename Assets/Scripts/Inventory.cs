@@ -8,6 +8,7 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         EventManager.Register(EventManager.EventType.CollectablePickup, PickupCollectableHandler);
+        EventManager.Register(EventManager.EventType.InventoryItemSelected, InventoryItemSelectedHandler);
     }
 
     private void Update()
@@ -23,6 +24,14 @@ public class Inventory : MonoBehaviour
         if (obj is Collectable collectable)
         {
             picked.Add(collectable.ItemData);
+        }
+    }
+
+    private void InventoryItemSelectedHandler(object obj)
+    {
+        if (obj is ItemData itemData)
+        {
+            picked.Remove(itemData);
         }
     }
 }

@@ -19,7 +19,6 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("OnPointerDown " + name);
         OnSelected?.Invoke(itemData);
     }
 }
