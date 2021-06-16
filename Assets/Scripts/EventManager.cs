@@ -3,9 +3,15 @@ using System.Collections.Generic;
 
 public static class EventManager
 {
-    private static Dictionary<string, List<Action<object>>> events = new Dictionary<string, List<Action<object>>>();
+    private static Dictionary<EventType, List<Action<object>>> events = new Dictionary<EventType, List<Action<object>>>();
 
-    public static void Register(string eventName, Action<object> listener)
+    public enum EventType
+    {
+        InventoryToggle,
+        CollectablePickup
+    }
+
+    public static void Register(EventType eventName, Action<object> listener)
     {
         if (events.ContainsKey(eventName))
         {
@@ -17,7 +23,7 @@ public static class EventManager
         }
     }
 
-    public static void Unregister(string eventName, Action<object> listener)
+    public static void Unregister(EventType eventName, Action<object> listener)
     {
         if (events.ContainsKey(eventName))
         {
@@ -30,7 +36,7 @@ public static class EventManager
         }
     }
 
-    public static void Trigger(string eventName, object param)
+    public static void Trigger(EventType eventName, object param)
     {
         if (events.ContainsKey(eventName))
         {

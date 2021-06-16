@@ -13,7 +13,7 @@ public class InventoryController : MonoBehaviour
 
     private void Awake()
     {
-        EventManager.Register(Inventory.ToggleEvent, Toggle);
+        EventManager.Register(EventManager.EventType.InventoryToggle, Toggle);
     }
 
     private void Toggle(object obj)

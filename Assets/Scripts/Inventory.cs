@@ -5,18 +5,16 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private List<ItemData> picked = new List<ItemData>();
 
-    public const string ToggleEvent = "ToggleInventory";
-
     private void Awake()
     {
-        EventManager.Register(Collectable.PickupEvent, PickupCollectableHandler);
+        EventManager.Register(EventManager.EventType.CollectablePickup, PickupCollectableHandler);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            EventManager.Trigger(ToggleEvent, picked);
+            EventManager.Trigger(EventManager.EventType.InventoryToggle, picked);
         }
     }
 
