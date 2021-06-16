@@ -6,6 +6,8 @@ public class Collectable : MonoBehaviour, IInteractable
     [SerializeField] private ItemData itemData;
     [SerializeField] private Outline outline;
 
+    public ItemData ItemData => itemData;
+
     private void Start()
     {
         outline.enabled = false;
@@ -23,7 +25,7 @@ public class Collectable : MonoBehaviour, IInteractable
 
     public void OnPointerClick()
     {
-        EventManager.Trigger(EventManager.EventType.CollectablePickup, itemData);
+        EventManager.Trigger(EventManager.EventType.CollectablePickup, this);
         gameObject.SetActive(false);
     }
 }

@@ -20,9 +20,9 @@ public class Inventory : MonoBehaviour
 
     private void PickupCollectableHandler(object obj)
     {
-        if (obj is ItemData itemData)
+        if (obj is Collectable collectable)
         {
-            picked.Add(itemData);
+            picked.Add(collectable.ItemData);
         }
     }
 }
