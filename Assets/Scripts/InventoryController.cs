@@ -41,6 +41,8 @@ public class InventoryController : MonoBehaviour
 
             grid.gameObject.SetActive(true);
             isOpen = true;
+
+            EventManager.Trigger(EventManager.EventType.InventoryToggleConfim, true);
         }
     }
 
@@ -55,5 +57,7 @@ public class InventoryController : MonoBehaviour
 
         grid.gameObject.SetActive(false);
         isOpen = false;
+
+        EventManager.Trigger(EventManager.EventType.InventoryToggleConfim, false);
     }
 }
