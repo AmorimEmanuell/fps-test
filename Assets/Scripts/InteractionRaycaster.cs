@@ -1,24 +1,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraRaycaster : MonoBehaviour
+public class InteractionRaycaster : MonoBehaviour
 {
     [SerializeField] private Transform myTransform;
 
     private const int RaycastBuffer = 5;
     private const float MaxDistance = 10f;
+    private const float DistanceInFront = 2f;
     private const string MainButtonName = "Fire1";
 
     private readonly RaycastHit[] results = new RaycastHit[RaycastBuffer];
     private readonly Dictionary<Collider, IInteractable> cachedInteractables = new Dictionary<Collider, IInteractable>();
 
     private IInteractable currentInteractable;
+    private Mode currentMode = Mode.Interaction;
+    private Collectable currentCollectable;
+
+    public enum Mode
+    {
+        Place,
+        Interaction
+    }
+
+    private void Awake()
+    {
+        EventManager.Register(EventManager.EventType.PlaceModeActivate, PlaceModeActivateHandler);
+    }
 
     private void Update()
     {
         var ray = new Ray(myTransform.position, myTransform.forward);
         var hits = Physics.RaycastNonAlloc(ray, results, MaxDistance);
 
+        if (currentMode == Mode.Interaction)
+        {
+            HandleInteractionMode(results, hits);
+        }
+        else
+        {
+            HandlePlaceMode(results, hits);
+        }
+    }
+
+    private void HandleInteractionMode(RaycastHit[] results, int hits)
+    {
         if (hits == 0)
         {
             DeselectCurrentInteractable();
@@ -72,6 +98,40 @@ public class CameraRaycaster : MonoBehaviour
                 currentInteractable.OnPointerClick();
             }
         }
+    }
+
+    public void PlaceModeActivateHandler(object obj)
+    {
+        if (obj is Collectable collectable)
+        {
+            currentCollectable = collectable;
+            currentMode = Mode.Place;
+        }
+    }
+
+    private void HandlePlaceMode(RaycastHit[] results, int hits)
+    {
+        if (Input.GetButtonUp(MainButtonName))
+        {
+            currentCollectable.Collider.enabled = true;
+            currentCollectable = null;
+            currentMode = Mode.Interaction;
+            return;
+        }
+
+        if (hits == 0)
+        {
+            PlaceCollectableInFront();
+            return;
+        }
+
+        var hit = GetClosestHit(results, hits);
+        currentCollectable.transform.position = hit.point;
+    }
+
+    private void PlaceCollectableInFront()
+    {
+        currentCollectable.transform.position = myTransform.position + (myTransform.forward.normalized * DistanceInFront);
     }
 
     private RaycastHit GetClosestHit(RaycastHit[] results, int hits)

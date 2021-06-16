@@ -9,7 +9,9 @@ public static class EventManager
     {
         InventoryToggle,
         InventoryToggleConfim,
-        CollectablePickup
+        CollectablePickup,
+        InventoryItemSelected,
+        PlaceModeActivate
     }
 
     public static void Register(EventType eventName, Action<object> listener)

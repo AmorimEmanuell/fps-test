@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,7 +36,8 @@ public class InventoryController : MonoBehaviour
             for (var i = 0; i < objectsPicked.Count; i++)
             {
                 var item = Instantiate(itemPrefab, grid);
-                item.SetSprite(objectsPicked[i].InventorySprite);
+                item.SetItemData(objectsPicked[i]);
+                item.OnSelected += OnItemSelected;
                 currentItems.Add(item);
             }
 
@@ -50,6 +52,7 @@ public class InventoryController : MonoBehaviour
     {
         foreach (var item in currentItems)
         {
+            item.OnSelected -= OnItemSelected;
             Destroy(item.gameObject);
         }
 
@@ -59,5 +62,11 @@ public class InventoryController : MonoBehaviour
         isOpen = false;
 
         EventManager.Trigger(EventManager.EventType.InventoryToggleConfim, false);
+    }
+
+    private void OnItemSelected(ItemData itemData)
+    {
+        Close();
+        EventManager.Trigger(EventManager.EventType.InventoryItemSelected, itemData);
     }
 }

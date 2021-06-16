@@ -1,12 +1,25 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour
+public class InventoryItem : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private Image image;
 
-    public void SetSprite(Sprite sprite)
+    private ItemData itemData;
+
+    public Action<ItemData> OnSelected;
+
+    public void SetItemData(ItemData itemData)
     {
-        image.sprite = sprite;
+        this.itemData = itemData;
+        image.sprite = itemData.InventorySprite;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("OnPointerDown " + name);
+        OnSelected?.Invoke(itemData);
     }
 }
