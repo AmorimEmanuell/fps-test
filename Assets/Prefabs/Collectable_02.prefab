@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 4f6045a6a4ad52648b1dc3a0ccd37610, type: 2}
+  myCollider: {fileID: 1430529355159520844}
   outline: {fileID: 4005001654667500866}
 --- !u!114 &4005001654667500866
 MonoBehaviour:

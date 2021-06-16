@@ -4,9 +4,11 @@ using UnityEngine;
 public class Collectable : MonoBehaviour, IInteractable
 {
     [SerializeField] private ItemData itemData;
+    [SerializeField] private Collider myCollider;
     [SerializeField] private Outline outline;
 
     public ItemData ItemData => itemData;
+    public Collider Collider => myCollider;
 
     private void Start()
     {
