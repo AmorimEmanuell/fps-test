@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9210951537220029940}
   - component: {fileID: 9210951537220029941}
   - component: {fileID: 9210951537220029834}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Room01_Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
