@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    // This is serializeField so i can easily debug on inspector
     [SerializeField] private List<ItemData> picked = new List<ItemData>();
 
     private void Awake()
