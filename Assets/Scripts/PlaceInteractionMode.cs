@@ -8,7 +8,7 @@ public class PlaceInteractionMode : InteractionMode
     private Transform myTransform;
     private InteractionRaycaster interactionRaycaster;
 
-    public PlaceInteractionMode(InteractionRaycaster interactionRaycaster, Transform myTransform)
+    public PlaceInteractionMode(InteractionRaycaster interactionRaycaster, Transform myTransform, LayerMask layerMask) : base(layerMask)
     {
         this.myTransform = myTransform;
         this.interactionRaycaster = interactionRaycaster;

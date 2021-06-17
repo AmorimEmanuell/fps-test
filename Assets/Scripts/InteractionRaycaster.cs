@@ -4,6 +4,8 @@ using UnityEngine;
 public class InteractionRaycaster : MonoBehaviour
 {
     [SerializeField] private Transform myTransform;
+    [SerializeField] private LayerMask placeModeLayerMask;
+    [SerializeField] private LayerMask selectionModeLayerMask;
 
     private const int RaycastBuffer = 5;
     private const float MaxDistance = 10f;
@@ -22,8 +24,8 @@ public class InteractionRaycaster : MonoBehaviour
 
     private void Awake()
     {
-        interactionModes.Add(Mode.Place, new PlaceInteractionMode(this, myTransform));
-        interactionModes.Add(Mode.Selection, new SelectionInteractionMode());
+        interactionModes.Add(Mode.Place, new PlaceInteractionMode(this, myTransform, placeModeLayerMask));
+        interactionModes.Add(Mode.Selection, new SelectionInteractionMode(selectionModeLayerMask));
 
         activeMode = interactionModes[Mode.Selection];
     }
@@ -31,7 +33,7 @@ public class InteractionRaycaster : MonoBehaviour
     private void Update()
     {
         var ray = new Ray(myTransform.position, myTransform.forward);
-        var hits = Physics.RaycastNonAlloc(ray, results, MaxDistance);
+        var hits = Physics.RaycastNonAlloc(ray, results, MaxDistance, activeMode.GetLayerMask());
 
         if (hits == 0)
         {

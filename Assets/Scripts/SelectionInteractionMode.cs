@@ -6,6 +6,10 @@ public class SelectionInteractionMode : InteractionMode
     private readonly Dictionary<Collider, IInteractable> cachedInteractables = new Dictionary<Collider, IInteractable>();
     private IInteractable currentInteractable;
 
+    public SelectionInteractionMode(LayerMask layerMask) : base(layerMask)
+    {
+    }
+
     public override void HandleInteraction(RaycastHit[] results, int hits, RaycastHit closestHit)
     {
         if (!cachedInteractables.TryGetValue(closestHit.collider, out IInteractable interactable))
