@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +29,8 @@ public class InteractionRaycaster : MonoBehaviour
         interactionModes.Add(Mode.Selection, new SelectionInteractionMode(selectionModeLayerMask));
 
         activeMode = interactionModes[Mode.Selection];
+
+        EventManager.Register(EventManager.EventType.InventoryToggleConfim, InventoryToggleConfirmHandler);
     }
 
     private void Update()
@@ -58,6 +61,17 @@ public class InteractionRaycaster : MonoBehaviour
     public void SwitchMode(Mode mode)
     {
         activeMode = interactionModes[mode];
+    }
+
+    private void InventoryToggleConfirmHandler(object obj)
+    {
+        if (obj is bool isInventoryOpen)
+        {
+            if (isInventoryOpen)
+            {
+                activeMode.HandleInteractionUp();
+            }
+        }
     }
 
     private RaycastHit GetClosestHit(RaycastHit[] results, int hits)
