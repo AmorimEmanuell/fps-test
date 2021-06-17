@@ -188,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 210263008}
   myTransform: {fileID: 210263009}
+  cameraTransform: {fileID: 1144694721}
   movementSpeed: 3
   cameraSpeed: 2
 --- !u!143 &210263008

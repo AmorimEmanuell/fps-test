@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private CharacterController characterController;
-    [SerializeField] private Transform myTransform;
+    [SerializeField] private Transform cameraTransform;
     [SerializeField] [Range(1, 10)] private float movementSpeed = 1f;
     [SerializeField] [Range(1, 10)] private float cameraSpeed = 1f;
 
@@ -18,11 +18,11 @@ public class PlayerController : MonoBehaviour
         var xMove = Input.GetAxis(HorizontalAxis);
         var zMove = Input.GetAxis(VerticalAxis);
 
-        var forward = myTransform.forward;
+        var forward = cameraTransform.forward;
         forward.y = 0f;
         forward *= zMove;
 
-        var right = myTransform.right;
+        var right = cameraTransform.right;
         right.y = 0f;
         right *= xMove;
 
@@ -33,9 +33,9 @@ public class PlayerController : MonoBehaviour
         var mouseX = Input.GetAxis(MouseAxisX);
         var mouseY = Input.GetAxis(MouseAxisY);
 
-        var rotation = myTransform.rotation.eulerAngles;
+        var rotation = cameraTransform.rotation.eulerAngles;
         rotation.x -= mouseY * cameraSpeed;
         rotation.y += mouseX * cameraSpeed;
-        myTransform.rotation = Quaternion.Euler(rotation);
+        cameraTransform.rotation = Quaternion.Euler(rotation);
     }
 }
