@@ -15,6 +15,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        UpdatePosition();
+        UpdateCamera();
+    }
+
+    private void UpdatePosition()
+    {
         var xMove = Input.GetAxis(HorizontalAxis);
         var zMove = Input.GetAxis(VerticalAxis);
 
@@ -29,7 +35,10 @@ public class PlayerController : MonoBehaviour
         var playerMove = forward.normalized + right.normalized;
         playerMove.y += Gravity;
         characterController.Move(playerMove * Time.deltaTime * movementSpeed);
+    }
 
+    private void UpdateCamera()
+    {
         var mouseX = Input.GetAxis(MouseAxisX);
         var mouseY = Input.GetAxis(MouseAxisY);
 
